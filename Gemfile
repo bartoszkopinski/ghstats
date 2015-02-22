@@ -1,4 +1,10 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in ghstats.gemspec
+gem "rake"
+
+group :test do
+  gem 'rspec', '>= 3'
+end
+
 gemspec
+
