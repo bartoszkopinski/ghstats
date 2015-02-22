@@ -23,7 +23,7 @@ module GHStats
   describe Stats do
     describe "#most_common_language" do
       context "for a user with Ruby repos" do
-        subject { described_class.new("rubyist", api: DummyAPIClient) }
+        subject { described_class.new("rubyist", DummyAPIClient) }
 
         it "returns Ruby as the most common language" do
           expect(subject.most_common_language).to eq("Ruby")
@@ -31,7 +31,7 @@ module GHStats
       end
 
       context "for a user with no repos" do
-        subject { described_class.new("inactive", api: DummyAPIClient) }
+        subject { described_class.new("inactive", DummyAPIClient) }
 
         it "returns nil as the most common language" do
           expect(subject.most_common_language).to be_nil
@@ -39,7 +39,7 @@ module GHStats
       end
 
       context "for a user with many unrecognized repos" do
-        subject { described_class.new("unknown", api: DummyAPIClient) }
+        subject { described_class.new("unknown", DummyAPIClient) }
 
         it "ignores unknown languages" do
           expect(subject.most_common_language).to eq("C++")
@@ -47,7 +47,7 @@ module GHStats
       end
 
       context "for a user with more than one most common language" do
-        subject { described_class.new("mixed", api: DummyAPIClient) }
+        subject { described_class.new("mixed", DummyAPIClient) }
 
         it "returns the most recent language" do
           expect(subject.most_common_language).to eq("Swift")

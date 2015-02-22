@@ -2,7 +2,7 @@ require 'octokit'
 
 module GHStats
   class Stats
-    def initialize username, api: Octokit::Client
+    def initialize username, api = Octokit::Client
       @api = api
       @username = username
     end
