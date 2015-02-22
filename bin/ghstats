@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+Signal.trap('INT') { abort }
+
+require 'ghstats'
+
+begin
+  puts GHStats::CLI.start(ARGV)
+rescue Interrupt
+  abort 'Quitting...'
+rescue Octokit::NotFound => e
+  abort "Account not found."
+rescue Octokit::TooManyRequests => e
+  abort "Requests limit exceeded. Authenticate or try again later."
+rescue Faraday::ConnectionFailed => e
+  abort "Could not connect to GitHub."
+rescue RuntimeError => e
+  abort e.message
+end
